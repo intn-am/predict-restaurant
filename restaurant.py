@@ -15,29 +15,43 @@ le_cat = joblib.load("profitability_encoder.pkl")
 st.set_page_config(page_title="Menu Profitability Predictor", page_icon="🍽", layout="wide")
 
 # =======================
-# Custom CSS
+# Custom CSS (Background Gambar + Header Box)
 # =======================
 st.markdown("""
     <style>
-    .prediction-box {
-        border-radius: 12px;
-        padding: 20px;
-        margin-top: 20px;
-    }
+        .header-container {
+            background-image: url('https://images.unsplash.com/photo-1555992336-03a23c2b63c6?auto=format&fit=crop&w=1650&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 60px;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .header-title {
+            background-color: rgba(255, 255, 255, 0.85);
+            display: inline-block;
+            padding: 20px 40px;
+            border-radius: 12px;
+        }
+        .header-title h1 {
+            font-size: 48px;
+            color: #d62828;
+            margin-bottom: 10px;
+        }
+        .header-title p {
+            font-size: 20px;
+            color: #333;
+        }
     </style>
-""", unsafe_allow_html=True)
 
-# =======================
-# Header (Updated with Box and Bigger Font)
-# =======================
-st.markdown("""
-    <div style='background-color: #f0f2f6; padding: 30px; border-radius: 15px; text-align: center;'>
-        <h1 style='color: #FF4B4B; font-size: 45px; margin-bottom: 10px;'>🍽 Menu Profitability Predictor</h1>
-        <p style='font-size: 20px; color: #333333;'>Prediksi profitabilitas menu restoran Anda menggunakan <b>Tuned Random Forest</b></p>
+    <div class='header-container'>
+        <div class='header-title'>
+            <h1>🍽 Menu Profitability Predictor</h1>
+            <p>Prediksi profitabilitas menu restoran Anda menggunakan <b>Tuned Random Forest</b></p>
+        </div>
     </div>
 """, unsafe_allow_html=True)
-
-st.markdown("---")
 
 # =======================
 # Sidebar
@@ -52,7 +66,7 @@ with st.sidebar:
         Gunakan model ini untuk membantu strategi harga & kategori menu Anda.
     """)
     st.markdown("---")
-    st.write("© 2025 | Dibuat dengan ❤️ menggunakan **Streamlit** & **Random Forest** oleh Intan Aulia M")
+    st.write("© 2025 | Dibuat dengan ❤️ menggunakan **Streamlit** & **Random Forest**")
 
 # =======================
 # Input Form
@@ -84,7 +98,7 @@ if st.button("🚀 Prediksi Profitabilitas", use_container_width=True):
 
         if prediction_label == "High":
             st.markdown(f"""
-                <div class="prediction-box" style="background-color:#D4EDDA; color:#155724;">
+                <div style="background-color:#D4EDDA; color:#155724; padding:20px; border-radius:10px;">
                 ✅ <b>Profitabilitas Tinggi</b><br>
                 Menu ini berpotensi memberikan <b>keuntungan besar</b> bagi restoran Anda.
                 </div>
@@ -92,7 +106,7 @@ if st.button("🚀 Prediksi Profitabilitas", use_container_width=True):
 
         elif prediction_label == "Medium":
             st.markdown(f"""
-                <div class="prediction-box" style="background-color:#FFF3CD; color:#856404;">
+                <div style="background-color:#FFF3CD; color:#856404; padding:20px; border-radius:10px;">
                 ℹ <b>Profitabilitas Sedang</b><br>
                 Menu ini memberikan keuntungan pada tingkat <b>menengah</b>.
                 </div>
@@ -100,7 +114,7 @@ if st.button("🚀 Prediksi Profitabilitas", use_container_width=True):
 
         else:
             st.markdown(f"""
-                <div class="prediction-box" style="background-color:#F8D7DA; color:#721C24;">
+                <div style="background-color:#F8D7DA; color:#721C24; padding:20px; border-radius:10px;">
                 ⚠ <b>Profitabilitas Rendah</b><br>
                 Menu ini cenderung memiliki <b>keuntungan rendah</b>.
                 </div>
