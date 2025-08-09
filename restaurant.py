@@ -6,8 +6,8 @@ import joblib
 # =======================
 model = joblib.load("best_random_forest_model.pkl")
 price_scaler = joblib.load("price_scaler.pkl")
-le_menu = joblib.load("menu_category_encoder.pkl")       # Encoder untuk MenuCategory
-le_cat = joblib.load("profitability_encoder.pkl")        # Encoder untuk Profitability (target)
+le_menu = joblib.load("menu_category_encoder.pkl")       # Encoder fitur MenuCategory
+le_cat = joblib.load("profitability_encoder.pkl")        # Encoder target Profitability
 
 # =======================
 # App Configuration
@@ -50,14 +50,12 @@ st.markdown("---")
 with st.sidebar:
     st.header("🔧 Input Data Menu")
 
-    # Menu Category Selection
     menu_categories = list(le_menu.classes_)
     menu_category = st.selectbox(
         "📋 Pilih Kategori Menu:",
         menu_categories
     )
 
-    # Price Input
     price = st.number_input(
         "💲 Harga Menu (USD):",
         min_value=0.0,
@@ -65,7 +63,6 @@ with st.sidebar:
         help="Masukkan harga menu dalam USD"
     )
 
-    # Predict Button
     predict_button = st.button("🚀 Prediksi Profitabilitas", use_container_width=True)
 
 # =======================
@@ -73,32 +70,26 @@ with st.sidebar:
 # =======================
 if predict_button:
     try:
-        # Encode kategori menu
+        # Encode fitur sesuai training
         menu_encoded = le_menu.transform([menu_category])[0]
-
-        # Scale harga
         price_scaled = price_scaler.transform([[price]])[0][0]
 
         # Prediksi
         prediction_num = model.predict([[menu_encoded, price_scaled]])[0]
-
-        # Decode hasil prediksi menjadi label Profitability
         prediction_label = le_cat.inverse_transform([prediction_num])[0]
 
-        # =======================
-        # Display Result
-        # =======================
+        # Output
         st.subheader("📊 Hasil Prediksi")
 
         if prediction_label == "High":
             st.success(f"✅ Predicted Profitability: *{prediction_label}*")
-            st.markdown("💡 Menu ini berpotensi memberikan *keuntungan tinggi* bagi restoran. Pertahankan kualitas dan promosi!")
+            st.markdown("💡 Menu ini berpotensi memberikan *keuntungan tinggi* bagi restoran.")
         elif prediction_label == "Medium":
             st.info(f"ℹ Predicted Profitability: *{prediction_label}*")
-            st.markdown("📈 Menu ini memberikan *keuntungan sedang*. Pertimbangkan strategi harga atau paket promo untuk meningkatkan penjualan.")
+            st.markdown("📈 Menu ini memberikan *keuntungan sedang*.")
         else:
             st.error(f"⚠ Predicted Profitability: *{prediction_label}*")
-            st.markdown("🔍 Menu ini memiliki *keuntungan rendah*. Perlu evaluasi bahan baku, harga jual, atau strategi pemasaran.")
+            st.markdown("🔍 Menu ini memiliki *keuntungan rendah*.")
 
         st.markdown("---")
         st.markdown("### 📌 Detail Input")
