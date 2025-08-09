@@ -20,7 +20,7 @@ st.set_page_config(page_title="Menu Profitability Predictor", page_icon="🍽", 
 st.markdown("""
     <style>
         .header-container {
-            background-image: url('https://images.unsplash.com/photo-1555992336-03a23c2b63c6?auto=format&fit=crop&w=1650&q=80');
+            background-image: url('https://images.app.goo.gl/QkCxjro2JDYc6eaS6');
             background-size: cover;
             background-position: center;
             padding: 60px;
@@ -48,7 +48,7 @@ st.markdown("""
     <div class='header-container'>
         <div class='header-title'>
             <h1>🍽 Menu Profitability Predictor</h1>
-            <p>Prediksi profitabilitas menu restoran Anda menggunakan <b>Tuned Random Forest</b></p>
+            <p>Prediksi profitabilitas menu restoran menggunakan <b>Tuned Random Forest</b></p>
         </div>
     </div>
 """, unsafe_allow_html=True)
@@ -63,10 +63,10 @@ with st.sidebar:
         - **Kategori Menu** (Beverages, Main Course, Dessert, dll)
         - **Harga Menu** (dalam USD)
 
-        Gunakan model ini untuk membantu strategi harga & kategori menu Anda.
+        Gunakan model ini untuk membantu strategi harga & kategori menu.
     """)
     st.markdown("---")
-    st.write("© 2025 | Dibuat dengan ❤️ menggunakan **Streamlit** & **Random Forest**")
+    st.write("© 2025 | Dibuat dengan ❤️ menggunakan **Streamlit** & **Random Forest** oleh Intan Aulia M")
 
 # =======================
 # Input Form
